@@ -21,15 +21,15 @@
 // SOIL é a biblioteca para leitura das imagens
 #include "SOIL.h"
 
-// Um pixel RGB (24 bits)
+// Um pixel Pixel (24 bits)
 typedef struct {
     unsigned char r, g, b;
-} RGB;
+} Pixel;
 
-// Uma imagem RGB
+// Uma imagem Pixel
 typedef struct {
     int width, height;
-    RGB* img;
+    Pixel* img;
 } Img;
 
 // Protótipos
@@ -57,7 +57,7 @@ int sel;
 void load(char* name, Img* pic)
 {
     int chan;
-    pic->img = (RGB*) SOIL_load_image(name, &pic->width, &pic->height, &chan, SOIL_LOAD_RGB);
+    pic->img = (Pixel*) SOIL_load_image(name, &pic->width, &pic->height, &chan, SOIL_LOAD_RGB);
     if(!pic->img)
     {
         printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
@@ -89,7 +89,7 @@ int main(int argc, char** argv)
     // A largura e altura da imagem de saída são iguais às da imagem de entrada (0)
     pic[1].width  = pic[0].width;
     pic[1].height = pic[0].height;
-	pic[1].img = calloc(pic[1].width * pic[1].height, 3); // W x H x 3 bytes (RGB)
+	pic[1].img = calloc(pic[1].width * pic[1].height, 3); // W x H x 3 bytes (Pixel)
 
 	// Especifica o tamanho inicial em pixels da janela GLUT
 	glutInitWindowSize(width, height);
@@ -113,8 +113,8 @@ int main(int argc, char** argv)
 	glMatrixMode(GL_MODELVIEW);
 
     // Converte para interpretar como matriz
-    RGB (*in)[width] = (RGB(*)[width]) pic[0].img;
-    RGB (*out)[width] = (RGB(*)[width]) pic[1].img;
+    Pixel (*in)[width] = (Pixel(*)[width]) pic[0].img;
+    Pixel (*out)[width] = (Pixel(*)[width]) pic[1].img;
 
 	// Aplica o algoritmo e gera a saida em out (pic[1].img)
 	// ...
@@ -153,7 +153,7 @@ void draw()
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  // Preto
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    // Para outras cores, veja exemplos em /etc/X11/rgb.txt
+    // Para outras cores, veja exemplos em /etc/X11/Pixel.txt
 
     glColor3ub(255, 255, 255);  // branco
 

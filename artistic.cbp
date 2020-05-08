@@ -11,7 +11,7 @@
 				<Option object_output="./" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="../facin32.jpg" />
+				<Option parameters="facin32.jpg" />
 				<Compiler>
 					<Add option="-O3" />
 					<Add directory="include" />
@@ -29,13 +29,14 @@
 				<Option object_output="./" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="../facin32.jpg" />
+				<Option parameters="facin32.jpg" />
 				<Compiler>
 					<Add option="-O3" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="freeglut.dll" />
 					<Add library="gdi32" />
 					<Add library="comdlg32" />
 					<Add library="comctl32" />
@@ -45,6 +46,8 @@
 					<Add library="glu32" />
 					<Add library="opengl32" />
 					<Add library="winmm" />
+					<Add library="freeglut" />
+					<Add directory="lib" />
 				</Linker>
 			</Target>
 		</Build>
