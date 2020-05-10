@@ -22,12 +22,14 @@
 #include "SOIL.h"
 
 // Um pixel Pixel (24 bits)
-typedef struct {
+typedef struct
+{
     unsigned char r, g, b;
 } Pixel;
 
 // Uma imagem Pixel
-typedef struct {
+typedef struct
+{
     int width, height;
     Pixel* img;
 } Img;
@@ -69,19 +71,20 @@ void load(char* name, Img* pic)
 //Basicamente modificar o main APENAS. Talvez alguma outra coisinha
 int main(int argc, char** argv)
 {
-    if(argc < 1) {
+    if(argc < 1)
+    {
         printf("artistic [im. entrada]\n");
         exit(1);
     }
-	glutInit(&argc,argv);
+    glutInit(&argc,argv);
 
-	// Define do modo de operacao da GLUT
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    // Define do modo de operacao da GLUT
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-	// pic[0] -> imagem de entrada
-	// pic[1] -> imagem de saida
+    // pic[0] -> imagem de entrada
+    // pic[1] -> imagem de saida
 
-	// Carrega a imagem
+    // Carrega a imagem
     load(argv[1], &pic[0]);
 
     width = pic[0].width;
@@ -90,44 +93,67 @@ int main(int argc, char** argv)
     // A largura e altura da imagem de saída são iguais às da imagem de entrada (0)
     pic[1].width  = pic[0].width;
     pic[1].height = pic[0].height;
-	pic[1].img = calloc(pic[1].width * pic[1].height, 3); // W x H x 3 bytes (Pixel)
+    pic[1].img = calloc(pic[1].width * pic[1].height, 3); // W x H x 3 bytes (Pixel)
 
-	// Especifica o tamanho inicial em pixels da janela GLUT
-	glutInitWindowSize(width, height);
+    // Especifica o tamanho inicial em pixels da janela GLUT
+    glutInitWindowSize(width, height);
 
-	// Cria a janela passando como argumento o titulo da mesma
-	glutCreateWindow("Arte Computacional");
+    // Cria a janela passando como argumento o titulo da mesma
+    glutCreateWindow("Arte Computacional");
 
-	// Registra a funcao callback de redesenho da janela de visualizacao
-	glutDisplayFunc(draw);
+    // Registra a funcao callback de redesenho da janela de visualizacao
+    glutDisplayFunc(draw);
 
-	// Registra a funcao callback para tratamento das teclas ASCII
-	glutKeyboardFunc (keyboard);
+    // Registra a funcao callback para tratamento das teclas ASCII
+    glutKeyboardFunc (keyboard);
 
     // Exibe as dimensões na tela, para conferência
     printf("Origem  : %s %d x %d\n", argv[1], pic[0].width, pic[0].height);
     sel = 0; // entrada
 
-	// Define a janela de visualizacao 2D
-	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0.0,width,height,0.0);
-	glMatrixMode(GL_MODELVIEW);
+    // Define a janela de visualizacao 2D
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0,width,height,0.0);
+    glMatrixMode(GL_MODELVIEW);
 
     // Converte para interpretar como matriz
     Pixel (*in)[width] = (Pixel(*)[width]) pic[0].img;
     Pixel (*out)[width] = (Pixel(*)[width]) pic[1].img;
 
-	// Aplica o algoritmo e gera a saida em out (pic[1].img)
-	// ...
-	// ...
+    // Aplica o algoritmo e gera a saida em out (pic[1].img)
+    // ...
+    // ...
     // Exemplo: copia apenas o componente vermelho para a saida
 
     //Generating random numbers
-    int numSeeds = 1000;
+    /* int numSeeds = 1000;
     //int sementes[numSeeds][height][width];
     //char sementes[numSeeds][8];
     Pixel sementes[numSeeds];
-    for(int i = 0; i<numSeeds; i++){
+    int i;
+    for(i=0; i<numSeeds; i++)
+    {
+    int upperH = height;
+    int lowerH = 0;
+    int seedH = (rand() % (upperH - lowerH + 1)) + lowerH;
+    int upperW = width;
+    int lowerW = 0;
+    int seedW = (rand() % (upperW - lowerW + 1)) + lowerW;
+    out[seedH][seedW].r = in[seedH][seedW].r;
+    out[seedH][seedW].g = in[seedH][seedW].g;
+    out[seedH][seedW].b = in[seedH][seedW].b;
+    sementes[i] = out[seedH][seedW];
+    }
+
+    */
+
+    //Generating random numbers
+    int numSeeds = 500;
+    int matriz[numSeeds][2];
+    Pixel sementes[numSeeds];
+    int i;
+    for(i = 0; i<numSeeds; i++)
+    {
         int upperH = height;
         int lowerH = 0;
         int seedH = (rand() % (upperH - lowerH + 1)) + lowerH;
@@ -138,34 +164,74 @@ int main(int argc, char** argv)
         out[seedH][seedW].g = in[seedH][seedW].g;
         out[seedH][seedW].b = in[seedH][seedW].b;
         sementes[i] = out[seedH][seedW];
+        matriz[i][0] = seedH;
+        matriz[i][1] = seedW;
+    }
+
+    for(i=0; i<numSeeds; i++)
+    {
+        printf("Height: %d - ", matriz[i][0]);
+        printf("Width: %d; \n", matriz[i][1]);
+    }
+
+    int indice = 0;
+    int y;
+    int x;
+    int j;
+    int menorDistancia;
+    for(y=0; y<height; y++)
+    {
+        for(x=0; x<width; x++)
+        {
+            menorDistancia = 1000;
+
+            for(j=0; j<numSeeds; j++)
+            {
+
+                int x1 = matriz[j][1];
+                int y1 = matriz[j][0];
+                int distancia = sqrt(((x - x1) * (x - x1)) + ((y - y1) * (y - y1)));
+                if(distancia<menorDistancia)
+                {
+                    menorDistancia = distancia;
+                    indice = j;
+                }
+            }
+            //printf("Menor distancia: %d; \n", menorDistancia);
+            out[y][x].r = sementes[indice].r;
+            out[y][x].g = sementes[indice].g;
+            out[y][x].b = sementes[indice].b;
+        }
     }
 
 
-    for(int i = 0; i<numSeeds; i++){
+    for(i = 0; i<numSeeds; i++)
+    {
         printf("Out = %x  ", sementes[i]);
     }
 
 
-  //  for(int y=0; y<height; y++)
+    //  for(int y=0; y<height; y++)
     //     for(int x=0; x<width; x++)
-      //      out[y][x].r = in[y][x].r;
+    //      out[y][x].r = in[y][x].r;
 
-	// Cria texturas em memória a partir dos pixels das imagens
+    // Cria texturas em memória a partir dos pixels das imagens
     tex[0] = SOIL_create_OGL_texture((unsigned char*) pic[0].img, width, height, SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
     tex[1] = SOIL_create_OGL_texture((unsigned char*) pic[1].img, width, height, SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
 
-	// Entra no loop de eventos, não retorna
+    // Entra no loop de eventos, não retorna
     glutMainLoop();
 }
 
 // Gerencia eventos de teclado
 void keyboard(unsigned char key, int x, int y)
 {
-    if(key==27) {
-      // ESC: libera memória e finaliza
-      free(pic[0].img);
-      free(pic[1].img);
-      exit(1);
+    if(key==27)
+    {
+        // ESC: libera memória e finaliza
+        free(pic[0].img);
+        free(pic[1].img);
+        exit(1);
     }
     if(key >= '1' && key <= '2')
         // 1-2: seleciona a imagem correspondente (origem ou destino)
