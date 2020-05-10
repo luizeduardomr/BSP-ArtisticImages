@@ -125,7 +125,8 @@ int main(int argc, char** argv)
     //Generating random numbers
     int numSeeds = 1000;
     //int sementes[numSeeds][height][width];
-    //char sementes[numSeeds];
+    //char sementes[numSeeds][8];
+    Pixel sementes[numSeeds];
     for(int i = 0; i<numSeeds; i++){
         int upperH = height;
         int lowerH = 0;
@@ -136,8 +137,12 @@ int main(int argc, char** argv)
         out[seedH][seedW].r = in[seedH][seedW].r;
         out[seedH][seedW].g = in[seedH][seedW].g;
         out[seedH][seedW].b = in[seedH][seedW].b;
-        //printf("Out = %x  ", out[seedH][seedW]);
+        sementes[i] = out[seedH][seedW];
+    }
 
+
+    for(int i = 0; i<numSeeds; i++){
+        printf("Out = %x  ", sementes[i]);
     }
 
 
