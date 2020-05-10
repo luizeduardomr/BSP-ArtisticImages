@@ -36,7 +36,7 @@ typedef struct {
 void load(char* name, Img* pic);
 void valida();
 
-// Funções da interface gráfica e OpenGL
+// Funções da interface gráfica e OpenGL NÃO MEXER
 void init();
 void draw();
 void keyboard(unsigned char key, int x, int y);
@@ -66,6 +66,7 @@ void load(char* name, Img* pic)
     printf("Load: %d x %d x %d\n", pic->width, pic->height, chan);
 }
 
+//Basicamente modificar o main APENAS. Talvez alguma outra coisinha
 int main(int argc, char** argv)
 {
     if(argc < 1) {
@@ -120,9 +121,29 @@ int main(int argc, char** argv)
 	// ...
 	// ...
     // Exemplo: copia apenas o componente vermelho para a saida
-    for(int y=0; y<height; y++)
-        for(int x=0; x<width; x++)
-            out[y][x].r = in[y][x].r;
+
+    //Generating random numbers
+    int numSeeds = 1000;
+    //int sementes[numSeeds][height][width];
+    //char sementes[numSeeds];
+    for(int i = 0; i<numSeeds; i++){
+        int upperH = height;
+        int lowerH = 0;
+        int seedH = (rand() % (upperH - lowerH + 1)) + lowerH;
+        int upperW = width;
+        int lowerW = 0;
+        int seedW = (rand() % (upperW - lowerW + 1)) + lowerW;
+        out[seedH][seedW].r = in[seedH][seedW].r;
+        out[seedH][seedW].g = in[seedH][seedW].g;
+        out[seedH][seedW].b = in[seedH][seedW].b;
+        //printf("Out = %x  ", out[seedH][seedW]);
+
+    }
+
+
+  //  for(int y=0; y<height; y++)
+    //     for(int x=0; x<width; x++)
+      //      out[y][x].r = in[y][x].r;
 
 	// Cria texturas em memória a partir dos pixels das imagens
     tex[0] = SOIL_create_OGL_texture((unsigned char*) pic[0].img, width, height, SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
