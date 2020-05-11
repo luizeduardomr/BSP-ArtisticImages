@@ -148,7 +148,7 @@ int main(int argc, char** argv)
     */
 
     //Generating random numbers
-    int numSeeds = 500;
+    int numSeeds = 5000; //após o número 1163, começa a dar erro e a imagem não é gerada (não sei pq)
     int matriz[numSeeds][2];
     Pixel sementes[numSeeds];
     int i;
@@ -156,7 +156,7 @@ int main(int argc, char** argv)
     {
         int upperH = height;
         int lowerH = 0;
-        int seedH = (rand() % (upperH - lowerH + 1)) + lowerH;
+        int seedH = (rand() % (upperH - lowerH )) + lowerH;
         int upperW = width;
         int lowerW = 0;
         int seedW = (rand() % (upperW - lowerW + 1)) + lowerW;
@@ -168,22 +168,24 @@ int main(int argc, char** argv)
         matriz[i][1] = seedW;
     }
 
-    for(i=0; i<numSeeds; i++)
+    /*for(i=0; i<numSeeds; i++)
     {
         printf("Height: %d - ", matriz[i][0]);
         printf("Width: %d; \n", matriz[i][1]);
     }
+    */
 
     int indice = 0;
     int y;
     int x;
     int j;
     int menorDistancia;
+
     for(y=0; y<height; y++)
     {
         for(x=0; x<width; x++)
         {
-            menorDistancia = 1000;
+            menorDistancia = 500;
 
             for(j=0; j<numSeeds; j++)
             {
@@ -205,11 +207,11 @@ int main(int argc, char** argv)
     }
 
 
-    for(i = 0; i<numSeeds; i++)
-    {
-        printf("Out = %x  ", sementes[i]);
-    }
-
+    /* for(i = 0; i<numSeeds; i++)
+     {
+         printf("Out = %x  ", sementes[i]);
+     }
+    */
 
     //  for(int y=0; y<height; y++)
     //     for(int x=0; x<width; x++)
