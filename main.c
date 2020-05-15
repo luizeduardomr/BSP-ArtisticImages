@@ -148,7 +148,7 @@ int main(int argc, char** argv)
     */
 
     //Generating random numbers
-    int numSeeds = 5000; //após o número 1163, começa a dar erro e a imagem não é gerada (não sei pq)
+    int numSeeds = 7000; //após o número 1163, começa a dar erro e a imagem não é gerada (não sei pq)
     int matriz[numSeeds][2];
     Pixel sementes[numSeeds];
     int i;
