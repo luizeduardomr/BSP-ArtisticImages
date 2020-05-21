@@ -81,23 +81,23 @@
 
 1588961708 c:\users\10049190\desktop\artistic\soil.h
 
-1588961710 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_dxt.c
+1589156921 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_dxt.c
 	"image_DXT.h"
 	<math.h>
 	<stdlib.h>
 	<string.h>
 	<stdio.h>
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_dxt.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_dxt.h
 
-1588961710 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_helper.c
+1589156921 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_helper.c
 	"image_helper.h"
 	<stdlib.h>
 	<math.h>
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_helper.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\image_helper.h
 
-1588961710 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\soil.c
+1589156921 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\soil.c
 	<windows.h>
 	<wingdi.h>
 	<GL/gl.h>
@@ -112,12 +112,12 @@
 	<stdlib.h>
 	<string.h>
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\soil.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\soil.h
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stb_image_aug.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stb_image_aug.h
 	<stdio.h>
 
-1588961710 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stb_image_aug.c
+1589156921 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stb_image_aug.c
 	"stb_image_aug.h"
 	<math.h>
 	<string.h>
@@ -129,11 +129,11 @@
 	"stbi_DDS_aug.h"
 	"stbi_DDS_aug_c.h"
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stbi_dds_aug.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stbi_dds_aug.h
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stbi_dds_aug_c.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\lib\soil\stbi_dds_aug_c.h
 
-1589145906 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\main.c
+1590092653 source:c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\main.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -147,21 +147,21 @@
 	<GL/glut.h>
 	"SOIL.h"
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\glut.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\glut.h
 	"freeglut.h"
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut.h
 	"freeglut_std.h"
 	"freeglut_ext.h"
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut_std.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut_std.h
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut_ext.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\include\gl\freeglut_ext.h
 
-1588961710 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\soil.h
+1589156921 c:\users\lucas\onedrive\햞ea de trabalho\3 semestre\c\artisticimages\soil.h
 
 1589144789 source:d:\git projects\artisticimages\lib\soil\image_dxt.c
 	"image_DXT.h"

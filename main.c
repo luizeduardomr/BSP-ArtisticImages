@@ -148,21 +148,52 @@ int main(int argc, char** argv)
     */
 
     //Generating random numbers
-    int numSeeds = 5000; //após o número 1163, começa a dar erro e a imagem não é gerada (não sei pq)
+    int numSeeds = 7000; //após o número 1163, começa a dar erro e a imagem não é gerada (não sei pq)
     int matriz[numSeeds][2];
     Pixel sementes[numSeeds];
     int i;
+    int mediaR = 0;
+    int mediaG = 0;
+    int mediaB = 0;
     for(i = 0; i<numSeeds; i++)
     {
-        int upperH = height;
-        int lowerH = 0;
-        int seedH = (rand() % (upperH - lowerH )) + lowerH;
-        int upperW = width;
-        int lowerW = 0;
-        int seedW = (rand() % (upperW - lowerW + 1)) + lowerW;
-        out[seedH][seedW].r = in[seedH][seedW].r;
-        out[seedH][seedW].g = in[seedH][seedW].g;
-        out[seedH][seedW].b = in[seedH][seedW].b;
+        int seedW =0;
+        int seedH = 0;
+
+        //upper e lower setados para nunca pegar sementes nas bordas da imagem
+        int upperH = height-1;
+        int lowerH = 1;
+        seedH = (rand() % (upperH - lowerH )) + lowerH;
+        //upper e lower setados para nunca pegar sementes nas bordas da imagem
+        int upperW = width-1;
+        int lowerW = 1;
+        seedW = (rand() % (upperW - lowerW + 1)) + lowerW;
+
+
+        printf("%d", i);
+        printf("%s", " - Width: ");
+        printf("%d", seedW);
+        printf("%s", " - Height: ");
+        printf("%d", seedH);
+        printf("%s", " - RGB: ");
+        printf("%d, %d, %d", in[seedH][seedW+1].r, in[seedH][seedW+1].g, in[seedH][seedW+1].b);
+        printf("%s", "\n");
+
+/*
+
+MELHORIA DAS CORES:
+- média normal das cores RGB (cada uma separadamente) e a cor da semente é a média do R do G e do B dos 8 pixels ao redor.
+*/
+        mediaR = calculaMedia8(in[seedH][seedW+1].r, in[seedH][seedW-1].r, in[seedH+1][seedW+1].r, in[seedH-1][seedW+1].r, in[seedH-1][seedW-1].r, in[seedH+1][seedW-1].r, in[seedH+1][seedW].r, in[seedH-1][seedW].r);
+
+        mediaG = calculaMedia8(in[seedH][seedW+1].g, in[seedH][seedW-1].g, in[seedH+1][seedW+1].g, in[seedH-1][seedW+1].g, in[seedH-1][seedW-1].g, in[seedH+1][seedW-1].g, in[seedH+1][seedW].g, in[seedH-1][seedW].g);
+
+        mediaB = calculaMedia8(in[seedH][seedW+1].b, in[seedH][seedW-1].b, in[seedH+1][seedW+1].b, in[seedH-1][seedW+1].b, in[seedH-1][seedW-1].b, in[seedH+1][seedW-1].b, in[seedH+1][seedW].b, in[seedH-1][seedW].b);
+
+
+        out[seedH][seedW].r = mediaR;
+        out[seedH][seedW].g = mediaG;
+        out[seedH][seedW].b = mediaB;
         sementes[i] = out[seedH][seedW];
         matriz[i][0] = seedH;
         matriz[i][1] = seedW;
@@ -199,7 +230,7 @@ int main(int argc, char** argv)
                     indice = j;
                 }
             }
-            //printf("Menor distancia: %d; \n", menorDistancia);
+
             out[y][x].r = sementes[indice].r;
             out[y][x].g = sementes[indice].g;
             out[y][x].b = sementes[indice].b;
@@ -207,15 +238,6 @@ int main(int argc, char** argv)
     }
 
 
-    /* for(i = 0; i<numSeeds; i++)
-     {
-         printf("Out = %x  ", sementes[i]);
-     }
-    */
-
-    //  for(int y=0; y<height; y++)
-    //     for(int x=0; x<width; x++)
-    //      out[y][x].r = in[y][x].r;
 
     // Cria texturas em memória a partir dos pixels das imagens
     tex[0] = SOIL_create_OGL_texture((unsigned char*) pic[0].img, width, height, SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
@@ -224,6 +246,13 @@ int main(int argc, char** argv)
     // Entra no loop de eventos, não retorna
     glutMainLoop();
 }
+
+int calculaMedia8(int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8)
+{
+    return (x1+x2+x3+x4+x5+x6+x7+x8)/8;
+}
+
+
 
 // Gerencia eventos de teclado
 void keyboard(unsigned char key, int x, int y)
